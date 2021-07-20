@@ -8,17 +8,20 @@ jest.mock('../../../src/api/entry-point/entry-point-definition');
 
 describe('Gateway Definition Test Suite', () => {
     const TEST_GATEWAY_NAME = 'TestGateway';
+    const TEST_ENTRY_POINT_DEFINITION = 'TestEntryPoint';
     const EMPTY_GATEWAY_NAME = '';
     const INVALID_GATEWAY_NAME = 'Foo Bar###';
     const EntryPointDefinitionMock = mocked(EntryPointDefinition, true);
 
     beforeEach(() => {
         EntryPointDefinitionMock.mockReset();
-        EntryPointDefinitionMock.prototype.validate.mockReset();
+        EntryPointDefinitionMock.prototype.validateDefinition.mockReset();
     });
 
     test('When validating a gateway with entry points it should return an empty list', () => {
-        const entryPointDefinition = new EntryPointDefinition();
+        const entryPointDefinition = new EntryPointDefinition(
+            TEST_ENTRY_POINT_DEFINITION
+        );
         const definition = new GatewayDefinition({
             name: TEST_GATEWAY_NAME,
             entryPointDefinitions: [entryPointDefinition],
@@ -40,10 +43,14 @@ describe('Gateway Definition Test Suite', () => {
     });
 
     test('When validating a gateway with an invalid entry point it should return a list containing the errors from the entry point definition', () => {
-        EntryPointDefinitionMock.prototype.validate.mockImplementation(() => {
-            return [new Error('Error from sub definitions')];
-        });
-        const entryPointDefinition = new EntryPointDefinition();
+        EntryPointDefinitionMock.prototype.validateDefinition.mockImplementation(
+            () => {
+                return [new Error('Error from sub definitions')];
+            }
+        );
+        const entryPointDefinition = new EntryPointDefinition(
+            TEST_ENTRY_POINT_DEFINITION
+        );
         const definition = new GatewayDefinition({
             name: TEST_GATEWAY_NAME,
             entryPointDefinitions: [entryPointDefinition],
@@ -57,11 +64,15 @@ describe('Gateway Definition Test Suite', () => {
     test('When validating a gateway with an empty name it should return a list containing an invalid gateway name error', () => {
         const definition1 = new GatewayDefinition({
             name: EMPTY_GATEWAY_NAME,
-            entryPointDefinitions: [new EntryPointDefinition()],
+            entryPointDefinitions: [
+                new EntryPointDefinition(TEST_ENTRY_POINT_DEFINITION),
+            ],
         });
         const definition2 = new GatewayDefinition({
             name: INVALID_GATEWAY_NAME,
-            entryPointDefinitions: [new EntryPointDefinition()],
+            entryPointDefinitions: [
+                new EntryPointDefinition(TEST_ENTRY_POINT_DEFINITION),
+            ],
         });
 
         expect(definition1.validate()).toEqual([
