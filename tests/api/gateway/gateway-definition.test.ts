@@ -19,9 +19,10 @@ describe('Gateway Definition Test Suite', () => {
     });
 
     test('When validating a gateway with entry points it should return an empty list', () => {
-        const entryPointDefinition = new EntryPointDefinition(
-            TEST_ENTRY_POINT_DEFINITION
-        );
+        const entryPointDefinition = new EntryPointDefinition({
+            name: TEST_ENTRY_POINT_DEFINITION,
+            methods: [],
+        });
         const definition = new GatewayDefinition({
             name: TEST_GATEWAY_NAME,
             entryPointDefinitions: [entryPointDefinition],
@@ -48,9 +49,10 @@ describe('Gateway Definition Test Suite', () => {
                 return [new Error('Error from sub definitions')];
             }
         );
-        const entryPointDefinition = new EntryPointDefinition(
-            TEST_ENTRY_POINT_DEFINITION
-        );
+        const entryPointDefinition = new EntryPointDefinition({
+            name: TEST_ENTRY_POINT_DEFINITION,
+            methods: [],
+        });
         const definition = new GatewayDefinition({
             name: TEST_GATEWAY_NAME,
             entryPointDefinitions: [entryPointDefinition],
@@ -65,13 +67,19 @@ describe('Gateway Definition Test Suite', () => {
         const definition1 = new GatewayDefinition({
             name: EMPTY_GATEWAY_NAME,
             entryPointDefinitions: [
-                new EntryPointDefinition(TEST_ENTRY_POINT_DEFINITION),
+                new EntryPointDefinition({
+                    name: TEST_ENTRY_POINT_DEFINITION,
+                    methods: [],
+                }),
             ],
         });
         const definition2 = new GatewayDefinition({
             name: INVALID_GATEWAY_NAME,
             entryPointDefinitions: [
-                new EntryPointDefinition(TEST_ENTRY_POINT_DEFINITION),
+                new EntryPointDefinition({
+                    name: TEST_ENTRY_POINT_DEFINITION,
+                    methods: [],
+                }),
             ],
         });
 

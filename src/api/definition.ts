@@ -17,11 +17,10 @@ export default abstract class Definition {
     }
 
     private validateName(): Error[] {
-        const errors: Error[] = [];
-        if (this.isValidName()) {
-            errors.push(this.getInvalidNameError());
+        if (!this.isValidName()) {
+            return [];
         }
-        return errors;
+        return [this.getInvalidNameError()];
     }
 
     private isValidName() {
