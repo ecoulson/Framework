@@ -7,8 +7,9 @@ import NoEntryPointDefinitionsError from '../../../src/api/gateway/no-entry-poin
 jest.mock('../../../src/api/entry-point/entry-point-definition');
 
 describe('Gateway Definition Test Suite', () => {
-    const TEST_GATEWAY_NAME = 'Test Gateway';
+    const TEST_GATEWAY_NAME = 'TestGateway';
     const EMPTY_GATEWAY_NAME = '';
+    const INVALID_GATEWAY_NAME = 'Foo Bar###';
     const EntryPointDefinitionMock = mocked(EntryPointDefinition, true);
 
     beforeEach(() => {
@@ -54,13 +55,26 @@ describe('Gateway Definition Test Suite', () => {
     });
 
     test('When validating a gateway with an empty name it should return a list containing an invalid gateway name error', () => {
-        const definition = new GatewayDefinition({
+        const definition1 = new GatewayDefinition({
             name: EMPTY_GATEWAY_NAME,
             entryPointDefinitions: [new EntryPointDefinition()],
         });
+        const definition2 = new GatewayDefinition({
+            name: INVALID_GATEWAY_NAME,
+            entryPointDefinitions: [new EntryPointDefinition()],
+        });
 
-        expect(definition.validate()).toEqual([
-            new InvalidGatewayNameError(EMPTY_GATEWAY_NAME),
+        expect(definition1.validate()).toEqual([
+            new InvalidGatewayNameError(
+                EMPTY_GATEWAY_NAME,
+                new RegExp(/^(?:[a-zA-z_-])+$/)
+            ),
+        ]);
+        expect(definition2.validate()).toEqual([
+            new InvalidGatewayNameError(
+                INVALID_GATEWAY_NAME,
+                new RegExp(/^(?:[a-zA-z_-])+$/)
+            ),
         ]);
     });
 });
