@@ -1,6 +1,8 @@
 import { mocked } from 'ts-jest/utils';
 import EntryPointMethodDefinition from '../../../src/api/entry-point-method/entry-point-method-definition';
 import EntryPointDefintion from '../../../src/api/entry-point/entry-point-definition';
+import ModelDefinition from '../../../src/api/model/model-definition';
+import FunctionProtocol from '../../../src/api/protocol/function-protocol';
 
 jest.mock('../../../src/api/entry-point-method/entry-point-method-definition');
 
@@ -18,9 +20,12 @@ describe('Entry Point Definition', () => {
     });
 
     test('When validating an entry point with valid entry point methods it should return an empty list', () => {
-        const methodDefinition = new EntryPointMethodDefinition(
-            TEST_ENTRY_POINT_METHOD_DEFINITION
-        );
+        const methodDefinition = new EntryPointMethodDefinition({
+            name: TEST_ENTRY_POINT_METHOD_DEFINITION,
+            protocol: new FunctionProtocol(),
+            input: new ModelDefinition(''),
+            output: new ModelDefinition(''),
+        });
 
         const definition = new EntryPointDefintion({
             name: TEST_ENTRY_POINT_DEFINITION,
@@ -40,9 +45,12 @@ describe('Entry Point Definition', () => {
         const definition = new EntryPointDefintion({
             name: TEST_ENTRY_POINT_DEFINITION,
             methods: [
-                new EntryPointMethodDefinition(
-                    TEST_ENTRY_POINT_METHOD_DEFINITION
-                ),
+                new EntryPointMethodDefinition({
+                    name: TEST_ENTRY_POINT_METHOD_DEFINITION,
+                    protocol: new FunctionProtocol(),
+                    input: new ModelDefinition(''),
+                    output: new ModelDefinition(''),
+                }),
             ],
         });
 
