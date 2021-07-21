@@ -17,8 +17,8 @@ describe('Entry Point Definition', () => {
 
     test('When validating an entry point with valid entry point methods it should return an empty list', () => {
         ModelDefinitionMock.prototype.validate.mockImplementation(() => []);
-        const input = new ModelDefinition(MODEL_DEFINITION);
-        const output = new ModelDefinition(MODEL_DEFINITION);
+        const input = new ModelDefinition({ name: MODEL_DEFINITION });
+        const output = new ModelDefinition({ name: MODEL_DEFINITION });
         const protocol = new FunctionProtocol();
 
         const definition = new EntryPointMethodDefinition({
@@ -40,8 +40,8 @@ describe('Entry Point Definition', () => {
         ]);
         const definition = new EntryPointMethodDefinition({
             name: TEST_ENTRY_POINT_DEFINITION,
-            input: new ModelDefinition(MODEL_DEFINITION),
-            output: new ModelDefinition(MODEL_DEFINITION),
+            input: new ModelDefinition({ name: MODEL_DEFINITION }),
+            output: new ModelDefinition({ name: MODEL_DEFINITION }),
             protocol: new FunctionProtocol(),
         });
 

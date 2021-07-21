@@ -1,15 +1,16 @@
 import { doesMatchRegex } from '../common/util';
+import DefinitionInterface from './definition.interface';
 import InvalidGatewayNameError from './gateway/invalid-gateway-name-error';
 
-export default abstract class Definition {
+export default abstract class Definition<T extends DefinitionInterface> {
     private static readonly DEFINITION_NAME_PATTERN = new RegExp(
         /^(?:[a-zA-z_-])+$/
     );
 
-    constructor(private definitionName: string) {}
+    constructor(protected definition: T) {}
 
     public get name(): string {
-        return this.definitionName;
+        return this.definition.name;
     }
 
     public validate(): Error[] {

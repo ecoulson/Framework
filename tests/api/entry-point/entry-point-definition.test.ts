@@ -5,6 +5,7 @@ import ModelDefinition from '../../../src/api/model/model-definition';
 import FunctionProtocol from '../../../src/api/protocol/function-protocol';
 
 jest.mock('../../../src/api/entry-point-method/entry-point-method-definition');
+jest.mock('../../../src/api/model/model-definition');
 
 describe('Entry Point Definition', () => {
     const EntryPointMethodDefinitionMock = mocked(
@@ -13,6 +14,7 @@ describe('Entry Point Definition', () => {
     );
     const TEST_ENTRY_POINT_DEFINITION = 'TestEntryPoint';
     const TEST_ENTRY_POINT_METHOD_DEFINITION = 'TestEntryPointMethod';
+    const MODEL_DEFINITION = 'TestModel';
 
     beforeEach(() => {
         EntryPointMethodDefinitionMock.mockReset();
@@ -23,8 +25,8 @@ describe('Entry Point Definition', () => {
         const methodDefinition = new EntryPointMethodDefinition({
             name: TEST_ENTRY_POINT_METHOD_DEFINITION,
             protocol: new FunctionProtocol(),
-            input: new ModelDefinition(''),
-            output: new ModelDefinition(''),
+            input: new ModelDefinition({ name: MODEL_DEFINITION }),
+            output: new ModelDefinition({ name: MODEL_DEFINITION }),
         });
 
         const definition = new EntryPointDefintion({
@@ -48,8 +50,8 @@ describe('Entry Point Definition', () => {
                 new EntryPointMethodDefinition({
                     name: TEST_ENTRY_POINT_METHOD_DEFINITION,
                     protocol: new FunctionProtocol(),
-                    input: new ModelDefinition(''),
-                    output: new ModelDefinition(''),
+                    input: new ModelDefinition({ name: MODEL_DEFINITION }),
+                    output: new ModelDefinition({ name: MODEL_DEFINITION }),
                 }),
             ],
         });

@@ -1,13 +1,9 @@
 import Definition from '../definition';
 import ModelDefinition from '../model/model-definition';
 import Protocol from '../protocol/protocol';
-import EntryPointMethodInterface from './entry-point-method-definition.interface';
+import EntryPointMethodDefinitionInterface from './entry-point-method-definition.interface';
 
-export default class EntryPointMethodDefinition extends Definition {
-    constructor(private definition: EntryPointMethodInterface) {
-        super(definition.name);
-    }
-
+export default class EntryPointMethodDefinition extends Definition<EntryPointMethodDefinitionInterface> {
     public get input(): ModelDefinition {
         return this.definition.input;
     }
