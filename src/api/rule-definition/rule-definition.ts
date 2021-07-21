@@ -1,5 +1,8 @@
 import Definition from '../definition/definition';
+import RuleRegistry from '../rule/rule-registry';
+import NoRuleError from './no-rule-error';
 import RuleDefinitionInterface from './rule-definition.interface';
+import RuleType from './rule-type';
 
 export default class RuleDefinition<ArgType> extends Definition<
     RuleDefinitionInterface<ArgType>
@@ -12,7 +15,14 @@ export default class RuleDefinition<ArgType> extends Definition<
         return this.definition.ruleName;
     }
 
+    get type(): RuleType {
+        return this.definition.type;
+    }
+
     protected validateDefinition(): Error[] {
-        throw new Error('Method not implemented.');
+        if (RuleRegistry.hasRule(this.ruleName)) {
+            return [];
+        }
+        return [new NoRuleError(this.ruleName)];
     }
 }
