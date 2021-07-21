@@ -28,12 +28,12 @@ describe('Entry Point Definition', () => {
             input: new ModelDefinition({
                 name: MODEL_DEFINITION,
                 structure: {},
-                rule: [],
+                rules: [],
             }),
             output: new ModelDefinition({
                 name: MODEL_DEFINITION,
                 structure: {},
-                rule: [],
+                rules: [],
             }),
         });
 
@@ -61,12 +61,12 @@ describe('Entry Point Definition', () => {
                     input: new ModelDefinition({
                         name: MODEL_DEFINITION,
                         structure: {},
-                        rule: [],
+                        rules: [],
                     }),
                     output: new ModelDefinition({
                         name: MODEL_DEFINITION,
                         structure: {},
-                        rule: [],
+                        rules: [],
                     }),
                 }),
             ],

@@ -20,12 +20,12 @@ describe('Entry Point Method Definition', () => {
         const input = new ModelDefinition({
             name: MODEL_DEFINITION,
             structure: {},
-            rule: [],
+            rules: [],
         });
         const output = new ModelDefinition({
             name: MODEL_DEFINITION,
             structure: {},
-            rule: [],
+            rules: [],
         });
         const protocol = new FunctionProtocol();
 
@@ -51,12 +51,12 @@ describe('Entry Point Method Definition', () => {
             input: new ModelDefinition({
                 name: MODEL_DEFINITION,
                 structure: {},
-                rule: [],
+                rules: [],
             }),
             output: new ModelDefinition({
                 name: MODEL_DEFINITION,
                 structure: {},
-                rule: [],
+                rules: [],
             }),
             protocol: new FunctionProtocol(),
         });
