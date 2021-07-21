@@ -1,5 +1,5 @@
-import Definition from '../definition';
-import ModelDefinition from '../model/model-definition';
+import Definition from '../definition/definition';
+import ModelDefinition from '../model-definition/model-definition';
 import Protocol from '../protocol/protocol';
 import EntryPointMethodDefinitionInterface from './entry-point-method-definition.interface';
 

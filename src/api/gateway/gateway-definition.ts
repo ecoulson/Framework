@@ -1,14 +1,10 @@
 import { isEmpty } from '../../common/util';
-import Definition from '../definition';
+import Definition from '../definition/definition';
 import EntryPointDefintion from '../entry-point/entry-point-definition';
 import GatewayDefinitionInterface from './gateway-definition.interface';
 import NoEntryPointDefinitionsError from './no-entry-point-definitions-error';
 
 export default class GatewayDefinition extends Definition<GatewayDefinitionInterface> {
-    public get name(): string {
-        return this.definition.name;
-    }
-
     public get entryPoints(): EntryPointDefintion[] {
         return this.definition.entryPointDefinitions;
     }

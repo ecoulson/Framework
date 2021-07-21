@@ -1,11 +1,11 @@
 import { mocked } from 'ts-jest/utils';
 import EntryPointMethodDefinition from '../../../src/api/entry-point-method/entry-point-method-definition';
-import ModelDefinition from '../../../src/api/model/model-definition';
+import ModelDefinition from '../../../src/api/model-definition/model-definition';
 import FunctionProtocol from '../../../src/api/protocol/function-protocol';
 
-jest.mock('../../../src/api/model/model-definition');
+jest.mock('../../../src/api/model-definition/model-definition');
 
-describe('Entry Point Definition', () => {
+describe('Entry Point Method Definition', () => {
     const ModelDefinitionMock = mocked(ModelDefinition, true);
     const TEST_ENTRY_POINT_DEFINITION = 'TestEntryPoint';
     const MODEL_DEFINITION = 'TestModel';
@@ -17,8 +17,16 @@ describe('Entry Point Definition', () => {
 
     test('When validating an entry point with valid entry point methods it should return an empty list', () => {
         ModelDefinitionMock.prototype.validate.mockImplementation(() => []);
-        const input = new ModelDefinition({ name: MODEL_DEFINITION });
-        const output = new ModelDefinition({ name: MODEL_DEFINITION });
+        const input = new ModelDefinition({
+            name: MODEL_DEFINITION,
+            structure: {},
+            rule: [],
+        });
+        const output = new ModelDefinition({
+            name: MODEL_DEFINITION,
+            structure: {},
+            rule: [],
+        });
         const protocol = new FunctionProtocol();
 
         const definition = new EntryPointMethodDefinition({
@@ -40,8 +48,16 @@ describe('Entry Point Definition', () => {
         ]);
         const definition = new EntryPointMethodDefinition({
             name: TEST_ENTRY_POINT_DEFINITION,
-            input: new ModelDefinition({ name: MODEL_DEFINITION }),
-            output: new ModelDefinition({ name: MODEL_DEFINITION }),
+            input: new ModelDefinition({
+                name: MODEL_DEFINITION,
+                structure: {},
+                rule: [],
+            }),
+            output: new ModelDefinition({
+                name: MODEL_DEFINITION,
+                structure: {},
+                rule: [],
+            }),
             protocol: new FunctionProtocol(),
         });
 

@@ -1,7 +1,7 @@
 import { mocked } from 'ts-jest/utils';
 import EntryPointDefinition from '../../../src/api/entry-point/entry-point-definition';
 import GatewayDefinition from '../../../src/api/gateway/gateway-definition';
-import InvalidGatewayNameError from '../../../src/api/gateway/invalid-gateway-name-error';
+import InvalidDefinitionNameError from '../../../src/api/name/invalid-name-error';
 import NoEntryPointDefinitionsError from '../../../src/api/gateway/no-entry-point-definitions-error';
 
 jest.mock('../../../src/api/entry-point/entry-point-definition');
@@ -84,13 +84,13 @@ describe('Gateway Definition Test Suite', () => {
         });
 
         expect(definition1.validate()).toEqual([
-            new InvalidGatewayNameError(
+            new InvalidDefinitionNameError(
                 EMPTY_GATEWAY_NAME,
                 new RegExp(/^(?:[a-zA-z_-])+$/)
             ),
         ]);
         expect(definition2.validate()).toEqual([
-            new InvalidGatewayNameError(
+            new InvalidDefinitionNameError(
                 INVALID_GATEWAY_NAME,
                 new RegExp(/^(?:[a-zA-z_-])+$/)
             ),

@@ -1,4 +1,4 @@
-import DefinitionInterface from '../definition.interface';
+import DefinitionInterface from '../definition/definition.interface';
 import EntryPointDefintion from '../entry-point/entry-point-definition';
 
 export default interface GatewayDefinitionInterface

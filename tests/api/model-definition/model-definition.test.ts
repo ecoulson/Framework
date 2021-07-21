@@ -4,10 +4,7 @@ import EntryPointDefintion from '../../../src/api/entry-point/entry-point-defini
 import ModelDefinition from '../../../src/api/model-definition/model-definition';
 import FunctionProtocol from '../../../src/api/protocol/function-protocol';
 
-jest.mock('../../../src/api/entry-point-method/entry-point-method-definition');
-jest.mock('../../../src/api/model-definition/model-definition');
-
-describe('Entry Point Definition', () => {
+describe('Model Definition', () => {
     const EntryPointMethodDefinitionMock = mocked(
         EntryPointMethodDefinition,
         true

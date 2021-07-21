@@ -1,4 +1,4 @@
-import Definition from '../definition';
+import Definition from '../definition/definition';
 import EntryPointMethodDefinition from '../entry-point-method/entry-point-method-definition';
 import EntryPointDefintionInterface from './entry-point-definition.interface';
 
