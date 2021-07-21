@@ -1,6 +1,6 @@
-import { hasLength } from '../../common/util';
 import Definition from '../definition/definition';
 import DuplicateStructureNameError from './duplicate-structure-name-error';
+import ModelDefinitionNameMap from './model-definition-name-map';
 import ModelDefinitionInterface from './model-definition.interface';
 
 export default class ModelDefinition extends Definition<ModelDefinitionInterface> {
@@ -63,35 +63,13 @@ export default class ModelDefinition extends Definition<ModelDefinitionInterface
     }
 
     private validateDuplicateKeys() {
-        const structure = this.definition.structure as Record<
-            string,
-            ModelDefinition
-        >;
         const errors: Error[] = [];
-        const nameMap: Map<string, string[]> = this.buildNameMap(structure);
-        nameMap.forEach((keys, name) => {
-            if (!hasLength(keys, 1)) {
-                this.addDuplicateError(errors, name, keys);
-            }
+        const nameMap = new ModelDefinitionNameMap(
+            this.definition.structure as Record<string, ModelDefinition>
+        );
+        nameMap.getDuplicates().forEach((pair) => {
+            errors.push(new DuplicateStructureNameError(this.name, pair));
         });
         return errors;
-    }
-
-    private buildNameMap(structure: Record<string, ModelDefinition>) {
-        const nameMap: Map<string, string[]> = new Map<string, string[]>();
-        Object.keys(structure).forEach((key) => {
-            const name = structure[key].name;
-            if (!nameMap.has(name)) {
-                nameMap.set(name, []);
-            }
-            nameMap.get(name)!.push(key);
-        });
-        return nameMap;
-    }
-
-    private addDuplicateError(errors: Error[], name: string, keys: string[]) {
-        errors.push(
-            new DuplicateStructureNameError(this.definition.name, name, keys)
-        );
     }
 }

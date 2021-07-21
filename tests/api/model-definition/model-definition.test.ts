@@ -52,7 +52,10 @@ describe('Model Definition', () => {
         });
 
         expect(model.validate()).toEqual([
-            new DuplicateStructureNameError(MODEL_DEFINITION, 'A', ['a', 'b']),
+            new DuplicateStructureNameError(MODEL_DEFINITION, {
+                name: 'A',
+                keys: ['a', 'b'],
+            }),
         ]);
     });
 });
