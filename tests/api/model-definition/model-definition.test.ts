@@ -35,12 +35,16 @@ describe('Model Definition Test Suite', () => {
     test('When validating a model definition with no duplicate keys pairs it should return an empty list', () => {
         const model = new ExtensionDefinition({
             name: MODEL_NAME,
-            extendedModel: {
-                a: new StringDefinition({
-                    name: 'A',
-                    rules: [],
-                }),
-            },
+            extendedModel: new ObjectDefinition({
+                name: 'A',
+                structure: {
+                    a: new StringDefinition({
+                        name: 'B',
+                        rules: [],
+                    }),
+                },
+                rules: [],
+            }),
             rules: [],
         });
 
