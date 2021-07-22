@@ -2,7 +2,7 @@ import { hasLength } from '../../../common/util';
 import ModelDefinition from '../common/model-definition';
 import NameKeysDuplicatePair from '../common/name-keys-duplicate-pair';
 
-export default class ModelDefinitionNameMap {
+export default class ObjectDuplicateNameMap {
     private nameMap: Map<string, string[]>;
 
     constructor(private structure: Record<string, ModelDefinition>) {

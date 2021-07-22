@@ -1,9 +1,9 @@
 import NameKeysDuplicatePair from '../common/name-keys-duplicate-pair';
 
-export default class DuplicateStructureNameError extends Error {
+export default class DuplicateObjectNameError extends Error {
     constructor(modelName: string, duplicatePair: NameKeysDuplicatePair) {
         super(
-            `Model ${modelName} has a duplicate name (${
+            `Object ${modelName} has a duplicate name (${
                 duplicatePair.name
             }) on keys ${duplicatePair.keys.join(', ')}`
         );

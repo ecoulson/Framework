@@ -2,7 +2,7 @@ import { mocked } from 'ts-jest/utils';
 import ModelType from '../../../src/api/model-definition/common/model-type';
 import ExtensionDefinition from '../../../src/api/model-definition/extension-definition/extension-definition';
 import ListDefinition from '../../../src/api/model-definition/list-definition/list-definition';
-import DuplicateStructureNameError from '../../../src/api/model-definition/object-definition/duplicate-structure-name-error';
+import DuplicateObjectNameError from '../../../src/api/model-definition/object-definition/duplicate-object-name-error';
 import ObjectDefinition from '../../../src/api/model-definition/object-definition/object-definition';
 import StringDefinition from '../../../src/api/model-definition/string-definition/string-definition';
 import RuleDefinition from '../../../src/api/rule-definition/rule-definition';
@@ -65,7 +65,7 @@ describe('Model Definition Test Suite', () => {
         });
 
         expect(model.validate()).toEqual([
-            new DuplicateStructureNameError(MODEL_NAME, {
+            new DuplicateObjectNameError(MODEL_NAME, {
                 name: 'A',
                 keys: ['a', 'b'],
             }),
