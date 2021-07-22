@@ -15,7 +15,7 @@ export default class GatewayDefinition extends Definition<GatewayDefinitionInter
             errors.push(new NoEntryPointDefinitionsError(this.name));
         }
         this.entryPoints.forEach((entryPoint) =>
-            errors.push(...entryPoint.validateDefinition())
+            errors.push(...entryPoint.validate())
         );
         return errors;
     }

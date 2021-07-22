@@ -1,16 +1,16 @@
 import { mocked } from 'ts-jest/utils';
-import DuplicateStructureNameError from '../../../src/api/model-definition/duplicate-structure-name-error';
-import ListDefinition from '../../../src/api/model-definition/list-definition';
-import StringDefinition from '../../../src/api/model-definition/string-definition';
+import ModelType from '../../../src/api/model-definition/common/model-type';
+import ExtensionDefinition from '../../../src/api/model-definition/extension-definition/extension-definition';
+import ListDefinition from '../../../src/api/model-definition/list-definition/list-definition';
+import DuplicateStructureNameError from '../../../src/api/model-definition/object-definition/duplicate-structure-name-error';
+import ObjectDefinition from '../../../src/api/model-definition/object-definition/object-definition';
+import StringDefinition from '../../../src/api/model-definition/string-definition/string-definition';
 import RuleDefinition from '../../../src/api/rule-definition/rule-definition';
-import ModelType from '../../../src/api/model-definition/model-type';
-import ExtensionDefinition from '../../../src/api/model-definition/extension-definition';
-import ObjectDefinition from '../../../src/api/model-definition/object-definition';
 
 jest.mock('../../../src/api/rule-definition/rule-definition');
-jest.mock('../../../src/api/model-definition/list-definition');
+jest.mock('../../../src/api/model-definition/list-definition/list-definition');
 
-describe('Model Definition', () => {
+describe('Model Definition Test Suite', () => {
     const MODEL_NAME = 'TestModel';
     const RULE_NAME = 'TestRule';
     const MockRuleDefinition = mocked(RuleDefinition, true);

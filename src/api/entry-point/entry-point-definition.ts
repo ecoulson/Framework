@@ -7,7 +7,7 @@ export default class EntryPointDefintion extends Definition<EntryPointDefintionI
         return this.definition.methods;
     }
 
-    validateDefinition(): Error[] {
+    protected validateDefinition(): Error[] {
         const errors: Error[] = [];
         this.definition.methods.forEach((method) => {
             errors.push(...method.validate());

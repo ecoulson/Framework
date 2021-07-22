@@ -15,7 +15,7 @@ describe('Gateway Definition Test Suite', () => {
 
     beforeEach(() => {
         EntryPointDefinitionMock.mockReset();
-        EntryPointDefinitionMock.prototype.validateDefinition.mockReset();
+        EntryPointDefinitionMock.prototype.validate.mockReset();
     });
 
     test('When validating a gateway with entry points it should return an empty list', () => {
@@ -44,11 +44,9 @@ describe('Gateway Definition Test Suite', () => {
     });
 
     test('When validating a gateway with an invalid entry point it should return a list containing the errors from the entry point definition', () => {
-        EntryPointDefinitionMock.prototype.validateDefinition.mockImplementation(
-            () => {
-                return [new Error('Error from sub definitions')];
-            }
-        );
+        EntryPointDefinitionMock.prototype.validate.mockReturnValue([
+            new Error('Error from sub definitions'),
+        ]);
         const entryPointDefinition = new EntryPointDefinition({
             name: TEST_ENTRY_POINT_NAME,
             methods: [],

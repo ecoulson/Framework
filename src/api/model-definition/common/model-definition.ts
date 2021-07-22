@@ -1,4 +1,4 @@
-import Definition from '../definition/definition';
+import Definition from '../../definition/definition';
 import ModelDefinitionInterface from './model-definition.interface';
 import ModelType from './model-type';
 
@@ -13,7 +13,7 @@ export default abstract class ModelDefinition extends Definition<ModelDefinition
         return errors;
     }
 
-    private validateRules(): Error[] {
+    protected validateRules(): Error[] {
         const errors: Error[] = [];
         this.definition.rules.forEach((rule) => {
             errors.push(...rule.validate());

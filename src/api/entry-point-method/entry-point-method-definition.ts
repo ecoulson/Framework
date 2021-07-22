@@ -1,5 +1,5 @@
 import Definition from '../definition/definition';
-import ModelDefinition from '../model-definition/model-definition';
+import ModelDefinition from '../model-definition/common/model-definition';
 import Protocol from '../protocol/protocol';
 import EntryPointMethodDefinitionInterface from './entry-point-method-definition.interface';
 
@@ -16,7 +16,7 @@ export default class EntryPointMethodDefinition extends Definition<EntryPointMet
         return this.definition.protocol;
     }
 
-    validateDefinition(): Error[] {
+    protected validateDefinition(): Error[] {
         const errors: Error[] = [];
         errors.push(...this.input.validate(), ...this.output.validate());
         return errors;

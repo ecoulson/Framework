@@ -1,6 +1,6 @@
+import ModelDefinition from '../common/model-definition';
+import ModelType from '../common/model-type';
 import ListDefinitionInterface from './list-definition.interface';
-import ModelDefinition from './model-definition';
-import ModelType from './model-type';
 
 export default class ListDefinition extends ModelDefinition {
     constructor(definition: ListDefinitionInterface) {

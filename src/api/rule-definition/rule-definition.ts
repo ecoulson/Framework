@@ -1,8 +1,8 @@
 import Definition from '../definition/definition';
+import ModelType from '../model-definition/common/model-type';
 import RuleRegistry from '../rule/rule-registry';
 import NoRuleError from './no-rule-error';
 import RuleDefinitionInterface from './rule-definition.interface';
-import ModelType from '../model-definition/model-type';
 
 export default class RuleDefinition<ArgType> extends Definition<
     RuleDefinitionInterface<ArgType>

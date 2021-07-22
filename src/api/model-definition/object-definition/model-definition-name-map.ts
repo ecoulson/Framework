@@ -1,6 +1,6 @@
-import { hasLength } from '../../common/util';
-import ModelDefinition from './model-definition';
-import NameKeysDuplicatePair from './name-keys-duplicate-pair';
+import { hasLength } from '../../../common/util';
+import ModelDefinition from '../common/model-definition';
+import NameKeysDuplicatePair from '../common/name-keys-duplicate-pair';
 
 export default class ModelDefinitionNameMap {
     private nameMap: Map<string, string[]>;

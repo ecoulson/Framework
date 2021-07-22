@@ -1,6 +1,6 @@
+import ModelDefinition from '../common/model-definition';
+import ModelType from '../common/model-type';
 import ExtensionDefinitionInterface from './extension-definition.interface';
-import ModelDefinition from './model-definition';
-import ModelType from './model-type';
 
 export default class ExtensionDefinition extends ModelDefinition {
     constructor(definition: ExtensionDefinitionInterface) {

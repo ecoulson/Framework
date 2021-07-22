@@ -1,13 +1,16 @@
 import { mocked } from 'ts-jest/utils';
 import EntryPointMethodDefinition from '../../../src/api/entry-point-method/entry-point-method-definition';
 import EntryPointDefintion from '../../../src/api/entry-point/entry-point-definition';
-import ObjectDefinition from '../../../src/api/model-definition/object-definition';
+import ObjectDefinition from '../../../src/api/model-definition/object-definition/object-definition';
 import FunctionProtocol from '../../../src/api/protocol/function-protocol';
 
 jest.mock('../../../src/api/entry-point-method/entry-point-method-definition');
-jest.mock('../../../src/api/model-definition/model-definition');
+jest.mock(
+    '../../../src/api/model-definition/object-definition/object-definition'
+);
+jest.mock('../../../src/api/model-definition/common/model-definition');
 
-describe('Entry Point Definition', () => {
+describe('Entry Point Definition Test Suite', () => {
     const EntryPointMethodDefinitionMock = mocked(
         EntryPointMethodDefinition,
         true
@@ -47,11 +50,9 @@ describe('Entry Point Definition', () => {
     });
 
     test('When validating an entry point with an invalid entry point method it should return a list containing the errors from the entry point method definition', () => {
-        EntryPointMethodDefinitionMock.prototype.validate.mockImplementation(
-            () => {
-                return [new Error('Error from sub definition')];
-            }
-        );
+        EntryPointMethodDefinitionMock.prototype.validate.mockReturnValue([
+            new Error('Error from sub definition'),
+        ]);
         const definition = new EntryPointDefintion({
             name: TEST_ENTRY_POINT_NAME,
             methods: [

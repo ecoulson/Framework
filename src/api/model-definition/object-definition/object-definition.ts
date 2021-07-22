@@ -1,8 +1,8 @@
-import DuplicateStructureNameError from './duplicate-structure-name-error';
-import ModelDefinition from './model-definition';
+import ModelDefinition from '../common/model-definition';
 import ModelDefinitionNameMap from './model-definition-name-map';
-import ModelType from './model-type';
+import ModelType from '../common/model-type';
 import ObjectDefinitionInterface from './object-definition.interface';
+import DuplicateStructureNameError from './duplicate-structure-name-error';
 
 export default class ObjectDefinition extends ModelDefinition {
     constructor(definition: ObjectDefinitionInterface) {
