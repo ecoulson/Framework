@@ -1,10 +1,10 @@
 import { mocked } from 'ts-jest/utils';
-import EntryPointDefinition from '../../../src/api/definitions/entry-point/entry-point-definition';
-import GatewayDefinition from '../../../src/api/definitions/gateway/gateway-definition';
-import NoEntryPointDefinitionsError from '../../../src/api/definitions/gateway/no-entry-point-definitions-error';
-import InvalidNameError from '../../../src/api/definitions/name/invalid-name-error';
+import EntryPointDefinition from '../../../../src/api/definitions/entry-point/entry-point-definition';
+import GatewayDefinition from '../../../../src/api/definitions/gateway/gateway-definition';
+import NoEntryPointDefinitionsError from '../../../../src/api/definitions/gateway/no-entry-point-definitions-error';
+import InvalidNameError from '../../../../src/api/definitions/name/invalid-name-error';
 
-jest.mock('../../../src/api/definitions/entry-point/entry-point-definition');
+jest.mock('../../../../src/api/definitions/entry-point/entry-point-definition');
 
 describe('Gateway Definition Test Suite', () => {
     const TEST_GATEWAY_NAME = 'TestGateway';

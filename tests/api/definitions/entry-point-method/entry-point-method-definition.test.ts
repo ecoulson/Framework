@@ -1,9 +1,10 @@
 import { mocked } from 'ts-jest/utils';
-import EntryPointMethodDefinition from '../../../src/api/definitions/entry-point-method/entry-point-method-definition';
-import ObjectDefinition from '../../../src/api/definitions/model/object/object-definition';
-import FunctionProtocol from '../../../src/api/protocol/function-protocol';
+import EntryPointMethodDefinition from '../../../../src/api/definitions/entry-point-method/entry-point-method-definition';
+import ObjectDefinition from '../../../../src/api/definitions/model/object/object-definition';
+import FunctionProtocol from '../../../../src/api/protocol/function-protocol';
 
-jest.mock('../../../src/api/definitions/model/object/object-definition');
+jest.mock('../../../../src/api/definitions/model/object/object-definition');
+jest.mock('../../../../src/api/protocol/function-protocol');
 
 describe('Entry Point Method Definition Test Suite', () => {
     const MockObjectDefinition = mocked(ObjectDefinition, true);

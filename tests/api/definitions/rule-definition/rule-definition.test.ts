@@ -1,10 +1,10 @@
 import { mocked } from 'ts-jest/utils';
-import ModelType from '../../../src/api/definitions/model/common/model-type';
-import NoRuleError from '../../../src/api/definitions/rule/no-rule-error';
-import RuleDefinition from '../../../src/api/definitions/rule/rule-definition';
-import RuleRegistry from '../../../src/api/rule/rule-registry';
+import ModelType from '../../../../src/api/definitions/model/common/model-type';
+import NoRuleError from '../../../../src/api/definitions/rule/no-rule-error';
+import RuleDefinition from '../../../../src/api/definitions/rule/rule-definition';
+import RuleRegistry from '../../../../src/api/rule/rule-registry';
 
-jest.mock('../../../src/api/rule/rule-registry');
+jest.mock('../../../../src/api/rule/rule-registry');
 
 describe('Rule Definition Test Suite', () => {
     const MockedRuleRegistry = mocked(RuleRegistry, true);
