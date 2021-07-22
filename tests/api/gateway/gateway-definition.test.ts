@@ -19,6 +19,8 @@ describe('Gateway Definition Test Suite', () => {
     });
 
     test('When validating a gateway with entry points it should return an empty list', () => {
+        EntryPointDefinitionMock.prototype.validate.mockReturnValue([]);
+
         const entryPointDefinition = new EntryPointDefinition({
             name: TEST_ENTRY_POINT_NAME,
             methods: [],
@@ -62,6 +64,8 @@ describe('Gateway Definition Test Suite', () => {
     });
 
     test('When validating a gateway with an empty name it should return a list containing an invalid gateway name error', () => {
+        EntryPointDefinitionMock.prototype.validate.mockReturnValue([]);
+
         const definition1 = new GatewayDefinition({
             name: EMPTY_GATEWAY_NAME,
             entryPointDefinitions: [

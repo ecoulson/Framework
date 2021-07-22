@@ -25,6 +25,8 @@ describe('Entry Point Definition Test Suite', () => {
     });
 
     test('When validating an entry point with valid entry point methods it should return an empty list', () => {
+        EntryPointMethodDefinitionMock.prototype.validate.mockReturnValue([]);
+
         const methodDefinition = new EntryPointMethodDefinition({
             name: TEST_ENTRY_POINT_METHOD_NAME,
             protocol: new FunctionProtocol(),
