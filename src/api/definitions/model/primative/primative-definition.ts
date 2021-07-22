@@ -12,6 +12,13 @@ export default class PrimativeDefinition extends ModelDefinition {
     }
 
     protected validateModel() {
-        return this.validateRules();
+        if (this.isStructureRawType()) {
+            return [];
+        }
+        return this.validatePrimativeDefinition();
+    }
+
+    private validatePrimativeDefinition(): Error[] {
+        return (this.definition.structure as PrimativeDefinition).validate();
     }
 }
