@@ -1,14 +1,14 @@
 import { mocked } from 'ts-jest/utils';
 import NoRuleError from '../../../src/api/rule-definition/no-rule-error';
 import RuleDefinition from '../../../src/api/rule-definition/rule-definition';
-import RuleType from '../../../src/api/rule-definition/rule-type';
+import ModelType from '../../../src/api/model-definition/model-type';
 import RuleRegistry from '../../../src/api/rule/rule-registry';
 
 jest.mock('../../../src/api/rule/rule-registry');
 
 describe('Rule Definition Test', () => {
     const MockedRuleRegistry = mocked(RuleRegistry, true);
-    const UNREGISTERED_RULE_NAME = 'TestRule';
+    const RULE_NAME = 'TestRule';
 
     beforeEach(() => {
         MockedRuleRegistry.mockReset();
@@ -18,27 +18,28 @@ describe('Rule Definition Test', () => {
         MockedRuleRegistry.hasRule.mockImplementation(() => false);
 
         const definition = new RuleDefinition<{}>({
-            name: UNREGISTERED_RULE_NAME,
-            ruleName: UNREGISTERED_RULE_NAME,
+            name: RULE_NAME,
+            ruleName: RULE_NAME,
             argument: {},
-            type: RuleType.MODEL,
+            type: ModelType.OBJECT,
         });
 
-        expect(definition.validate()).toEqual([
-            new NoRuleError(UNREGISTERED_RULE_NAME),
-        ]);
+        expect(definition.validate()).toEqual([new NoRuleError(RULE_NAME)]);
     });
 
     test('When creating a rule definition thats registered then an empty list should be returned', () => {
         MockedRuleRegistry.hasRule.mockImplementation(() => true);
 
         const definition = new RuleDefinition<{}>({
-            name: UNREGISTERED_RULE_NAME,
-            ruleName: UNREGISTERED_RULE_NAME,
+            name: RULE_NAME,
+            ruleName: RULE_NAME,
             argument: {},
-            type: RuleType.MODEL,
+            type: ModelType.OBJECT,
         });
 
         expect(definition.validate()).toEqual([]);
+        expect(definition.arg).toEqual({});
+        expect(definition.type).toEqual(ModelType.OBJECT),
+            expect(definition.ruleName).toEqual(RULE_NAME);
     });
 });

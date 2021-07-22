@@ -2,7 +2,7 @@ import Definition from '../definition/definition';
 import RuleRegistry from '../rule/rule-registry';
 import NoRuleError from './no-rule-error';
 import RuleDefinitionInterface from './rule-definition.interface';
-import RuleType from './rule-type';
+import ModelType from '../model-definition/model-type';
 
 export default class RuleDefinition<ArgType> extends Definition<
     RuleDefinitionInterface<ArgType>
@@ -15,7 +15,7 @@ export default class RuleDefinition<ArgType> extends Definition<
         return this.definition.ruleName;
     }
 
-    get type(): RuleType {
+    get type(): ModelType {
         return this.definition.type;
     }
 

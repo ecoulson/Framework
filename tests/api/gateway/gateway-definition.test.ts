@@ -8,7 +8,7 @@ jest.mock('../../../src/api/entry-point/entry-point-definition');
 
 describe('Gateway Definition Test Suite', () => {
     const TEST_GATEWAY_NAME = 'TestGateway';
-    const TEST_ENTRY_POINT_DEFINITION = 'TestEntryPoint';
+    const TEST_ENTRY_POINT_NAME = 'TestEntryPoint';
     const EMPTY_GATEWAY_NAME = '';
     const INVALID_GATEWAY_NAME = 'Foo Bar###';
     const EntryPointDefinitionMock = mocked(EntryPointDefinition, true);
@@ -20,7 +20,7 @@ describe('Gateway Definition Test Suite', () => {
 
     test('When validating a gateway with entry points it should return an empty list', () => {
         const entryPointDefinition = new EntryPointDefinition({
-            name: TEST_ENTRY_POINT_DEFINITION,
+            name: TEST_ENTRY_POINT_NAME,
             methods: [],
         });
         const definition = new GatewayDefinition({
@@ -50,7 +50,7 @@ describe('Gateway Definition Test Suite', () => {
             }
         );
         const entryPointDefinition = new EntryPointDefinition({
-            name: TEST_ENTRY_POINT_DEFINITION,
+            name: TEST_ENTRY_POINT_NAME,
             methods: [],
         });
         const definition = new GatewayDefinition({
@@ -68,7 +68,7 @@ describe('Gateway Definition Test Suite', () => {
             name: EMPTY_GATEWAY_NAME,
             entryPointDefinitions: [
                 new EntryPointDefinition({
-                    name: TEST_ENTRY_POINT_DEFINITION,
+                    name: TEST_ENTRY_POINT_NAME,
                     methods: [],
                 }),
             ],
@@ -77,7 +77,7 @@ describe('Gateway Definition Test Suite', () => {
             name: INVALID_GATEWAY_NAME,
             entryPointDefinitions: [
                 new EntryPointDefinition({
-                    name: TEST_ENTRY_POINT_DEFINITION,
+                    name: TEST_ENTRY_POINT_NAME,
                     methods: [],
                 }),
             ],

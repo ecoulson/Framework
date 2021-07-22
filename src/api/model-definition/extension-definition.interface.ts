@@ -1,10 +1,9 @@
 import DefinitionInterface from '../definition/definition.interface';
 import RuleDefinition from '../rule-definition/rule-definition';
-import ModelType from './model-type';
 import StructureType from './structure-type';
 
-export default interface ModelDefinitionInterface extends DefinitionInterface {
-    structure: StructureType;
+export default interface ExtensionDefinitionInterface
+    extends DefinitionInterface {
     rules: RuleDefinition<any>[];
-    type: ModelType;
+    extendedModel: StructureType;
 }

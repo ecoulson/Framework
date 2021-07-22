@@ -1,7 +1,7 @@
 import { mocked } from 'ts-jest/utils';
 import EntryPointMethodDefinition from '../../../src/api/entry-point-method/entry-point-method-definition';
 import EntryPointDefintion from '../../../src/api/entry-point/entry-point-definition';
-import ModelDefinition from '../../../src/api/model-definition/model-definition';
+import ObjectDefinition from '../../../src/api/model-definition/object-definition';
 import FunctionProtocol from '../../../src/api/protocol/function-protocol';
 
 jest.mock('../../../src/api/entry-point-method/entry-point-method-definition');
@@ -12,9 +12,9 @@ describe('Entry Point Definition', () => {
         EntryPointMethodDefinition,
         true
     );
-    const TEST_ENTRY_POINT_DEFINITION = 'TestEntryPoint';
-    const TEST_ENTRY_POINT_METHOD_DEFINITION = 'TestEntryPointMethod';
-    const MODEL_DEFINITION = 'TestModel';
+    const TEST_ENTRY_POINT_NAME = 'TestEntryPoint';
+    const TEST_ENTRY_POINT_METHOD_NAME = 'TestEntryPointMethod';
+    const MODEL_NAME = 'TestModel';
 
     beforeEach(() => {
         EntryPointMethodDefinitionMock.mockReset();
@@ -23,22 +23,22 @@ describe('Entry Point Definition', () => {
 
     test('When validating an entry point with valid entry point methods it should return an empty list', () => {
         const methodDefinition = new EntryPointMethodDefinition({
-            name: TEST_ENTRY_POINT_METHOD_DEFINITION,
+            name: TEST_ENTRY_POINT_METHOD_NAME,
             protocol: new FunctionProtocol(),
-            input: new ModelDefinition({
-                name: MODEL_DEFINITION,
+            input: new ObjectDefinition({
+                name: MODEL_NAME,
                 structure: {},
                 rules: [],
             }),
-            output: new ModelDefinition({
-                name: MODEL_DEFINITION,
+            output: new ObjectDefinition({
+                name: MODEL_NAME,
                 structure: {},
                 rules: [],
             }),
         });
 
         const definition = new EntryPointDefintion({
-            name: TEST_ENTRY_POINT_DEFINITION,
+            name: TEST_ENTRY_POINT_NAME,
             methods: [methodDefinition],
         });
 
@@ -53,18 +53,18 @@ describe('Entry Point Definition', () => {
             }
         );
         const definition = new EntryPointDefintion({
-            name: TEST_ENTRY_POINT_DEFINITION,
+            name: TEST_ENTRY_POINT_NAME,
             methods: [
                 new EntryPointMethodDefinition({
-                    name: TEST_ENTRY_POINT_METHOD_DEFINITION,
+                    name: TEST_ENTRY_POINT_METHOD_NAME,
                     protocol: new FunctionProtocol(),
-                    input: new ModelDefinition({
-                        name: MODEL_DEFINITION,
+                    input: new ObjectDefinition({
+                        name: MODEL_NAME,
                         structure: {},
                         rules: [],
                     }),
-                    output: new ModelDefinition({
-                        name: MODEL_DEFINITION,
+                    output: new ObjectDefinition({
+                        name: MODEL_NAME,
                         structure: {},
                         rules: [],
                     }),

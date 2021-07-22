@@ -1,12 +1,15 @@
 import Definition from '../definition/definition';
-import DuplicateStructureNameError from './duplicate-structure-name-error';
-import ModelDefinitionNameMap from './model-definition-name-map';
 import ModelDefinitionInterface from './model-definition.interface';
+import ModelType from './model-type';
 
-export default class ModelDefinition extends Definition<ModelDefinitionInterface> {
+export default abstract class ModelDefinition extends Definition<ModelDefinitionInterface> {
+    public get type(): ModelType {
+        return this.definition.type;
+    }
+
     protected validateDefinition(): Error[] {
         const errors: Error[] = [];
-        errors.push(...this.validateStructure(), ...this.validateRules());
+        errors.push(...this.validateModel(), ...this.validateRules());
         return errors;
     }
 
@@ -18,58 +21,5 @@ export default class ModelDefinition extends Definition<ModelDefinitionInterface
         return errors;
     }
 
-    private validateStructure(): Error[] {
-        if (this.isPrimativeStructure()) {
-            return [];
-        } else if (this.isListDefinition()) {
-            return this.validateListStructure();
-        } else {
-            return this.validateObjectStructure();
-        }
-    }
-
-    private isPrimativeStructure() {
-        return (
-            this.definition.structure === 'String' ||
-            this.definition.structure === 'Boolean' ||
-            this.definition.structure === 'Number'
-        );
-    }
-
-    private isListDefinition() {
-        return this.definition.structure instanceof ModelDefinition;
-    }
-
-    private validateListStructure(): Error[] {
-        return (this.definition.structure as ModelDefinition).validate();
-    }
-
-    private validateObjectStructure() {
-        const errors: Error[] = [];
-        errors.push(...this.validateModels(), ...this.validateDuplicateKeys());
-        return errors;
-    }
-
-    private validateModels() {
-        const structure = this.definition.structure as Record<
-            string,
-            ModelDefinition
-        >;
-        const errors: Error[] = [];
-        Object.keys(structure).forEach((key) => {
-            errors.push(...structure[key].validate());
-        });
-        return errors;
-    }
-
-    private validateDuplicateKeys() {
-        const errors: Error[] = [];
-        const nameMap = new ModelDefinitionNameMap(
-            this.definition.structure as Record<string, ModelDefinition>
-        );
-        nameMap.getDuplicates().forEach((pair) => {
-            errors.push(new DuplicateStructureNameError(this.name, pair));
-        });
-        return errors;
-    }
+    abstract validateModel(): Error[];
 }
