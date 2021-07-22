@@ -14,7 +14,7 @@ export default class ObjectDefinition extends ModelDefinition {
         });
     }
 
-    public validateModel() {
+    protected validateModel() {
         const errors: Error[] = [];
         errors.push(...this.validateModels(), ...this.validateDuplicateKeys());
         return errors;

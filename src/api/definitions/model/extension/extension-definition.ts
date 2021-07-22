@@ -15,13 +15,11 @@ export default class ExtensionDefinition extends ModelDefinition {
         });
     }
 
-    public validateModel() {
-        const errors: Error[] = [];
+    protected validateModel() {
         if (this.isRawType()) {
-            errors.push(this.createExtendingRawTypeError());
+            return [this.createExtendingRawTypeError()];
         }
-        errors.push(...this.validateStructureAsModelDefinition());
-        return errors;
+        return this.validateStructureAsModelDefinition();
     }
 
     private isRawType() {

@@ -12,7 +12,7 @@ export default class ListDefinition extends ModelDefinition {
         });
     }
 
-    public validateModel() {
+    protected validateModel() {
         return [];
     }
 }

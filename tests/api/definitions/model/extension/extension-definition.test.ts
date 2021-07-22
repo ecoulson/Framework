@@ -1,7 +1,61 @@
+import { mocked } from 'ts-jest/utils';
+import RawDefinitionType from '../../../../../src/api/definitions/model/common/raw-definition-type';
+import ExtendingRawTypeError from '../../../../../src/api/definitions/model/extension/extending-raw-type-error';
+import ExtensionDefinition from '../../../../../src/api/definitions/model/extension/extension-definition';
+import StringDefinition from '../../../../../src/api/definitions/model/string/string-definition';
+
+jest.mock('../../../../../src/api/definitions/model/string/string-definition');
+
 describe('Extension Definition Test Suite', () => {
-    test('', () => {
-        // const definition = new ExtensionDefinition({
-        //     name: "test"
-        // })
+    const EXTENSTION_DEFINITION_NAME = 'ExtensionDefinition';
+    const MockStringDefinition = mocked(StringDefinition, true);
+
+    beforeEach(() => {
+        MockStringDefinition.mockReset();
+        MockStringDefinition.prototype.validate.mockReset();
+    });
+
+    test('When validating a valid extension definition it should return an empty list of errors', () => {
+        MockStringDefinition.prototype.validate.mockReturnValue([]);
+
+        const definition = new ExtensionDefinition({
+            name: EXTENSTION_DEFINITION_NAME,
+            extendedModel: new StringDefinition({
+                name: 'A',
+                rules: [],
+            }),
+            rules: [],
+        });
+
+        expect(definition.validate());
+    });
+
+    test('When validating an extension definition thats attempting to extend a raw type it should return a list of errors', () => {
+        const definition = new ExtensionDefinition({
+            name: EXTENSTION_DEFINITION_NAME,
+            extendedModel: RawDefinitionType.Number as any,
+            rules: [],
+        });
+
+        expect(definition.validate()).toEqual([
+            new ExtendingRawTypeError(EXTENSTION_DEFINITION_NAME, RawDefinitionType.Number),
+        ]);
+    });
+
+    test('When validating an invalid extended definition model it should return a list of errors', () => {
+        MockStringDefinition.prototype.validate.mockReturnValue([
+            new Error('Extended model errors'),
+        ]);
+
+        const definition = new ExtensionDefinition({
+            name: EXTENSTION_DEFINITION_NAME,
+            extendedModel: new StringDefinition({
+                name: 'A',
+                rules: [],
+            }),
+            rules: [],
+        });
+
+        expect(definition.validate()).toEqual([new Error('Extended model errors')]);
     });
 });

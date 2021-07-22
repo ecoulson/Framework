@@ -21,5 +21,5 @@ export default abstract class ModelDefinition extends Definition<ModelDefinition
         return errors;
     }
 
-    abstract validateModel(): Error[];
+    protected abstract validateModel(): Error[];
 }
