@@ -1,14 +1,14 @@
 import { mocked } from 'ts-jest/utils';
-import ModelType from '../../../src/api/model-definition/common/model-type';
-import ExtensionDefinition from '../../../src/api/model-definition/extension-definition/extension-definition';
-import ListDefinition from '../../../src/api/model-definition/list-definition/list-definition';
-import DuplicateObjectNameError from '../../../src/api/model-definition/object-definition/duplicate-object-name-error';
-import ObjectDefinition from '../../../src/api/model-definition/object-definition/object-definition';
-import StringDefinition from '../../../src/api/model-definition/string-definition/string-definition';
-import RuleDefinition from '../../../src/api/rule-definition/rule-definition';
+import ModelType from '../../../src/api/definitions/model/common/model-type';
+import ExtensionDefinition from '../../../src/api/definitions/model/extension/extension-definition';
+import ListDefinition from '../../../src/api/definitions/model/list/list-definition';
+import DuplicateObjectNameError from '../../../src/api/definitions/model/object/duplicate-object-name-error';
+import ObjectDefinition from '../../../src/api/definitions/model/object/object-definition';
+import StringDefinition from '../../../src/api/definitions/model/string/string-definition';
+import RuleDefinition from '../../../src/api/definitions/rule/rule-definition';
 
-jest.mock('../../../src/api/rule-definition/rule-definition');
-jest.mock('../../../src/api/model-definition/list-definition/list-definition');
+jest.mock('../../../src/api/definitions/rule/rule-definition');
+jest.mock('../../../src/api/definitions/model/list/list-definition');
 
 describe('Model Definition Test Suite', () => {
     const MODEL_NAME = 'TestModel';
@@ -77,9 +77,7 @@ describe('Model Definition Test Suite', () => {
     });
 
     test('When validating a model definition with an invalid list as the structure then it should return a list containing an error from the list', () => {
-        MockListDefinition.prototype.validate.mockReturnValue([
-            new Error('List errors'),
-        ]);
+        MockListDefinition.prototype.validate.mockReturnValue([new Error('List errors')]);
         const model = new ListDefinition({
             name: 'A',
             elementType: new StringDefinition({
@@ -93,9 +91,7 @@ describe('Model Definition Test Suite', () => {
     });
 
     test('When validating a model definition with an invalid rule it should return a list containing the errors from the rule', () => {
-        MockRuleDefinition.prototype.validate.mockReturnValue([
-            new Error('Rule errors'),
-        ]);
+        MockRuleDefinition.prototype.validate.mockReturnValue([new Error('Rule errors')]);
 
         const model = new ExtensionDefinition({
             name: MODEL_NAME,

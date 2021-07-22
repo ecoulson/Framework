@@ -1,10 +1,10 @@
 import { mocked } from 'ts-jest/utils';
-import EntryPointDefinition from '../../../src/api/entry-point/entry-point-definition';
-import GatewayDefinition from '../../../src/api/gateway/gateway-definition';
-import InvalidDefinitionNameError from '../../../src/api/name/invalid-name-error';
-import NoEntryPointDefinitionsError from '../../../src/api/gateway/no-entry-point-definitions-error';
+import EntryPointDefinition from '../../../src/api/definitions/entry-point/entry-point-definition';
+import GatewayDefinition from '../../../src/api/definitions/gateway/gateway-definition';
+import NoEntryPointDefinitionsError from '../../../src/api/definitions/gateway/no-entry-point-definitions-error';
+import InvalidNameError from '../../../src/api/definitions/name/invalid-name-error';
 
-jest.mock('../../../src/api/entry-point/entry-point-definition');
+jest.mock('../../../src/api/definitions/entry-point/entry-point-definition');
 
 describe('Gateway Definition Test Suite', () => {
     const TEST_GATEWAY_NAME = 'TestGateway';
@@ -58,9 +58,7 @@ describe('Gateway Definition Test Suite', () => {
             entryPointDefinitions: [entryPointDefinition],
         });
 
-        expect(definition.validate()).toEqual([
-            new Error('Error from sub definitions'),
-        ]);
+        expect(definition.validate()).toEqual([new Error('Error from sub definitions')]);
     });
 
     test('When validating a gateway with an empty name it should return a list containing an invalid gateway name error', () => {
@@ -86,16 +84,10 @@ describe('Gateway Definition Test Suite', () => {
         });
 
         expect(definition1.validate()).toEqual([
-            new InvalidDefinitionNameError(
-                EMPTY_GATEWAY_NAME,
-                new RegExp(/^(?:[a-zA-z_-])+$/)
-            ),
+            new InvalidNameError(EMPTY_GATEWAY_NAME, new RegExp(/^(?:[a-zA-z_-])+$/)),
         ]);
         expect(definition2.validate()).toEqual([
-            new InvalidDefinitionNameError(
-                INVALID_GATEWAY_NAME,
-                new RegExp(/^(?:[a-zA-z_-])+$/)
-            ),
+            new InvalidNameError(INVALID_GATEWAY_NAME, new RegExp(/^(?:[a-zA-z_-])+$/)),
         ]);
     });
 });

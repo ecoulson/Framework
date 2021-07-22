@@ -6,5 +6,4 @@ export const isNil = (x: any) => x === undefined || x === null;
 
 export const equals = (a: any, b: any) => a === b;
 
-export const doesMatchRegex = (s: string, expression: RegExp) =>
-    expression.test(s);
+export const doesMatchRegex = (s: string, expression: RegExp) => expression.test(s);

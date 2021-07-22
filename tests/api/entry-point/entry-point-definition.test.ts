@@ -1,20 +1,14 @@
 import { mocked } from 'ts-jest/utils';
-import EntryPointMethodDefinition from '../../../src/api/entry-point-method/entry-point-method-definition';
-import EntryPointDefintion from '../../../src/api/entry-point/entry-point-definition';
-import ObjectDefinition from '../../../src/api/model-definition/object-definition/object-definition';
+import EntryPointMethodDefinition from '../../../src/api/definitions/entry-point-method/entry-point-method-definition';
+import EntryPointDefintion from '../../../src/api/definitions/entry-point/entry-point-definition';
+import ObjectDefinition from '../../../src/api/definitions/model/object/object-definition';
 import FunctionProtocol from '../../../src/api/protocol/function-protocol';
 
-jest.mock('../../../src/api/entry-point-method/entry-point-method-definition');
-jest.mock(
-    '../../../src/api/model-definition/object-definition/object-definition'
-);
-jest.mock('../../../src/api/model-definition/common/model-definition');
+jest.mock('../../../src/api/definitions/entry-point-method/entry-point-method-definition');
+jest.mock('../../../src/api/definitions/model/object/object-definition');
 
 describe('Entry Point Definition Test Suite', () => {
-    const EntryPointMethodDefinitionMock = mocked(
-        EntryPointMethodDefinition,
-        true
-    );
+    const EntryPointMethodDefinitionMock = mocked(EntryPointMethodDefinition, true);
     const TEST_ENTRY_POINT_NAME = 'TestEntryPoint';
     const TEST_ENTRY_POINT_METHOD_NAME = 'TestEntryPointMethod';
     const MODEL_NAME = 'TestModel';
@@ -75,8 +69,6 @@ describe('Entry Point Definition Test Suite', () => {
             ],
         });
 
-        expect(definition.validate()).toEqual([
-            new Error('Error from sub definition'),
-        ]);
+        expect(definition.validate()).toEqual([new Error('Error from sub definition')]);
     });
 });
