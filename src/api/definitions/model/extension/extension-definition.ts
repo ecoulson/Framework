@@ -16,18 +16,10 @@ export default class ExtensionDefinition extends ModelDefinition {
     }
 
     protected validateModel() {
-        if (this.isRawType()) {
+        if (this.isStructureRawType()) {
             return [this.createExtendingRawTypeError()];
         }
         return this.validateStructureAsModelDefinition();
-    }
-
-    private isRawType() {
-        return (
-            equals(this.definition.structure, RawDefinitionType.Boolean) ||
-            equals(this.definition.structure, RawDefinitionType.Number) ||
-            equals(this.definition.structure, RawDefinitionType.String)
-        );
     }
 
     private createExtendingRawTypeError() {

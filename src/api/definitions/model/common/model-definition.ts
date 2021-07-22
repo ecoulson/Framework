@@ -1,10 +1,20 @@
+import { equals } from '../../../../common/util';
 import Definition from '../../common/definition';
 import ModelDefinitionInterface from './model-definition.interface';
 import ModelType from './model-type';
+import RawDefinitionType from './raw-definition-type';
 
 export default abstract class ModelDefinition extends Definition<ModelDefinitionInterface> {
     public get type(): ModelType {
         return this.definition.type;
+    }
+
+    protected isStructureRawType() {
+        return (
+            equals(this.definition.structure, RawDefinitionType.Boolean) ||
+            equals(this.definition.structure, RawDefinitionType.Number) ||
+            equals(this.definition.structure, RawDefinitionType.String)
+        );
     }
 
     protected validateDefinition(): Error[] {
