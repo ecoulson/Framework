@@ -2,7 +2,6 @@ import ModelDefinition from '../common/model-definition';
 import ObjectDuplicateNameMap from './object-duplicate-name-map';
 import ModelType from '../common/model-type';
 import ObjectDefinitionInterface from './object-definition.interface';
-import DuplicateObjectNameError from './duplicate-object-name-error';
 
 export default class ObjectDefinition extends ModelDefinition {
     constructor(definition: ObjectDefinitionInterface) {
@@ -30,13 +29,9 @@ export default class ObjectDefinition extends ModelDefinition {
     }
 
     private validateDuplicateKeys() {
-        const errors: Error[] = [];
         const nameMap = new ObjectDuplicateNameMap(
             this.definition.structure as Record<string, ModelDefinition>
         );
-        nameMap.getDuplicates().forEach((pair) => {
-            errors.push(new DuplicateObjectNameError(this.name, pair));
-        });
-        return errors;
+        return nameMap.generateDuplicateErrorsForObjectDefinition(this.name);
     }
 }

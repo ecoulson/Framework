@@ -2,6 +2,8 @@ import { mocked } from 'ts-jest/utils';
 import NumberDefinition from '../../../../../src/api/definitions/model/number/number-definition';
 import RuleDefinition from '../../../../../src/api/definitions/rule/rule-definition';
 
+jest.mock('../../../../../src/api/definitions/rule/rule-definition');
+
 describe('Number Definition Test Suite', () => {
     const NUMBER_DEFINITION_NAME = 'NumberDefinition';
     const MockRuleDefinition = mocked(RuleDefinition, true);
