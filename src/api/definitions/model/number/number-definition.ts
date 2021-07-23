@@ -1,6 +1,6 @@
 import ModelType from '../common/model-type';
-import RawDefinitionType from '../common/raw-definition-type';
 import PrimativeDefinition from '../primative/primative-definition';
+import PrimativeDefinitionType from '../primative/primative-definition-type';
 import NumberDefinitionInterface from './number-definition.interface';
 
 export default class NumberDefinition extends PrimativeDefinition {
@@ -8,7 +8,7 @@ export default class NumberDefinition extends PrimativeDefinition {
         super({
             name: definition.name,
             rules: definition.rules,
-            primative: RawDefinitionType.Number,
+            primative: PrimativeDefinitionType.NUMBER,
             type: ModelType.NUMBER,
         });
     }

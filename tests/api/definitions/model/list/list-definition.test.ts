@@ -1,6 +1,6 @@
 import { mocked } from 'ts-jest/utils';
-import RawDefinitionType from '../../../../../src/api/definitions/model/common/raw-definition-type';
 import ListDefinition from '../../../../../src/api/definitions/model/list/list-definition';
+import PrimativeDefinitionType from '../../../../../src/api/definitions/model/primative/primative-definition-type';
 import StringDefinition from '../../../../../src/api/definitions/model/string/string-definition';
 
 jest.mock('../../../../../src/api/definitions/model/string/string-definition');
@@ -17,7 +17,7 @@ describe('List Definition Test Suite', () => {
     test('When validating a list of raw type elements it should return an empty list', () => {
         const definition = new ListDefinition({
             name: LIST_DEFINITION_NAME,
-            elementType: RawDefinitionType.String,
+            elementType: PrimativeDefinitionType.STRING,
             rules: [],
         });
 

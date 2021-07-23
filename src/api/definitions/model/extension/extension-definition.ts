@@ -1,9 +1,8 @@
-import { equals } from '../../../../common/util';
 import ModelDefinition from '../common/model-definition';
 import ModelType from '../common/model-type';
 import ExtensionDefinitionInterface from './extension-definition.interface';
-import RawDefinitionType from '../common/raw-definition-type';
 import ExtendingRawTypeError from './extending-raw-type-error';
+import PrimativeDefinitionType from '../primative/primative-definition-type';
 
 export default class ExtensionDefinition extends ModelDefinition {
     constructor(definition: ExtensionDefinitionInterface) {
@@ -23,7 +22,10 @@ export default class ExtensionDefinition extends ModelDefinition {
     }
 
     private createExtendingRawTypeError() {
-        return new ExtendingRawTypeError(this.name, this.definition.structure as RawDefinitionType);
+        return new ExtendingRawTypeError(
+            this.name,
+            this.definition.structure as PrimativeDefinitionType
+        );
     }
 
     private validateStructureAsModelDefinition() {

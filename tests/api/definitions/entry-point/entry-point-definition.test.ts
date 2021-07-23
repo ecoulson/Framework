@@ -6,6 +6,7 @@ import FunctionProtocol from '../../../../src/api/protocol/function-protocol';
 
 jest.mock('../../../../src/api/definitions/entry-point-method/entry-point-method-definition');
 jest.mock('../../../../src/api/definitions/model/object/object-definition');
+jest.mock('../../../../src/api/protocol/function-protocol');
 
 describe('Entry Point Definition Test Suite', () => {
     const EntryPointMethodDefinitionMock = mocked(EntryPointMethodDefinition, true);

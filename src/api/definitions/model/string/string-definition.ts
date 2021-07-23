@@ -1,6 +1,6 @@
 import ModelType from '../common/model-type';
-import RawDefinitionType from '../common/raw-definition-type';
 import PrimativeDefinition from '../primative/primative-definition';
+import PrimativeDefinitionType from '../primative/primative-definition-type';
 import StringDefinitionInterface from './string-definition.interface';
 
 export default class StringDefinition extends PrimativeDefinition {
@@ -8,7 +8,7 @@ export default class StringDefinition extends PrimativeDefinition {
         super({
             name: definition.name,
             rules: definition.rules,
-            primative: RawDefinitionType.String,
+            primative: PrimativeDefinitionType.STRING,
             type: ModelType.STRING,
         });
     }

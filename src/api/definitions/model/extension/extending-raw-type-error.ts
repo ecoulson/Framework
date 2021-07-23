@@ -1,9 +1,9 @@
-import RawDefinitionType from '../common/raw-definition-type';
+import PrimativeDefinitionType from '../primative/primative-definition-type';
 
 export default class ExtendingRawTypeError extends Error {
-    constructor(name: string, type: RawDefinitionType) {
+    constructor(name: string, type: PrimativeDefinitionType) {
         super(
-            `Extension definition "${name}" is illegally trying to extend the raw type "${type}"`
+            `Extension definition "${name}" is illegally trying to extend the primative type "${type}"`
         );
         this.name = 'ExtendingRawTypeError';
     }

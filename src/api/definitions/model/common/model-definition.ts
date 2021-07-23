@@ -1,8 +1,8 @@
 import { equals } from '../../../../common/util';
 import Definition from '../../common/definition';
+import PrimativeDefinitionType from '../primative/primative-definition-type';
 import ModelDefinitionInterface from './model-definition.interface';
 import ModelType from './model-type';
-import RawDefinitionType from './raw-definition-type';
 
 export default abstract class ModelDefinition extends Definition<ModelDefinitionInterface> {
     public get type(): ModelType {
@@ -11,9 +11,9 @@ export default abstract class ModelDefinition extends Definition<ModelDefinition
 
     protected isStructureRawType() {
         return (
-            equals(this.definition.structure, RawDefinitionType.Boolean) ||
-            equals(this.definition.structure, RawDefinitionType.Number) ||
-            equals(this.definition.structure, RawDefinitionType.String)
+            equals(this.definition.structure, PrimativeDefinitionType.BOOLEAN) ||
+            equals(this.definition.structure, PrimativeDefinitionType.NUMBER) ||
+            equals(this.definition.structure, PrimativeDefinitionType.STRING)
         );
     }
 
