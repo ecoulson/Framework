@@ -1,3 +1,4 @@
+import IllegalDefinitionTypeError from '../common/illegal-definition-type-error';
 import ModelDefinition from '../common/model-definition';
 import PrimativeDefinitionInterface from './primative-definition.interface';
 
@@ -15,11 +16,11 @@ export default abstract class PrimativeDefinition extends ModelDefinition {
         if (this.isStructureAPrimative()) {
             return [];
         }
-        return this.validatePrimativeDefinition();
-    }
-
-    private validatePrimativeDefinition(): Error[] {
-        return (this.definition.structure as PrimativeDefinition).validate();
+        return [
+            new IllegalDefinitionTypeError(
+                `Primative definition "${this.name}" must be a primative type`
+            ),
+        ];
     }
 
     protected validateStructureType() {
