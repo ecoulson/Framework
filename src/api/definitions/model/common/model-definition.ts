@@ -17,10 +17,6 @@ export default abstract class ModelDefinition extends Definition<ModelDefinition
         );
     }
 
-    protected isStructureAModel() {
-        return this.definition.structure instanceof ModelDefinition;
-    }
-
     protected validateDefinition(): Error[] {
         const typeErrors = this.validateStructureType();
         if (!isEmpty(typeErrors)) {
