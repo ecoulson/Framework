@@ -22,8 +22,4 @@ export default abstract class PrimativeDefinition extends ModelDefinition {
             ),
         ];
     }
-
-    protected validateStructureType() {
-        return [];
-    }
 }

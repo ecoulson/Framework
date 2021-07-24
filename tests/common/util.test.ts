@@ -1,4 +1,11 @@
-import { doesMatchRegex, equals, hasLength, isEmpty, isNil } from '../../src/common/util';
+import {
+    doesMatchRegex,
+    equals,
+    hasLength,
+    isEmpty,
+    isNil,
+    isPlainObject,
+} from '../../src/common/util';
 
 describe('Util Test Suite', () => {
     describe('isEmpty Test Suite', () => {
@@ -37,6 +44,24 @@ describe('Util Test Suite', () => {
     describe('doesMatchRegex Test Suite', () => {
         test('When the string matches the regex it should return true', () => {
             expect(doesMatchRegex('a', new RegExp('a'))).toBeTruthy();
+        });
+    });
+
+    describe('isPlainObject Test Suite', () => {
+        test('When object is nil should return false', () => {
+            expect(isPlainObject(null)).toBeFalsy();
+        });
+
+        test('When object is an array it should return false', () => {
+            expect(isPlainObject([])).toBeFalsy();
+        });
+
+        test('When object is a string it should return false', () => {
+            expect(isPlainObject('')).toBeFalsy();
+        });
+
+        test('When object is a plain object it should return false', () => {
+            expect(isPlainObject({})).toBeTruthy();
         });
     });
 });

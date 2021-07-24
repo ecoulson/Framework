@@ -12,10 +12,6 @@ export default class ListDefinition extends ModelDefinition {
         });
     }
 
-    protected validateStructureType() {
-        return [];
-    }
-
     protected validateStructure(): Error[] {
         if (this.isStructureAPrimative()) {
             return [];

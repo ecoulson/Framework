@@ -14,10 +14,6 @@ export default class ExtensionDefinition extends ModelDefinition {
         });
     }
 
-    protected validateStructureType() {
-        return [];
-    }
-
     protected validateStructure() {
         if (this.isStructureAPrimative()) {
             return [this.createExtendingRawTypeError()];

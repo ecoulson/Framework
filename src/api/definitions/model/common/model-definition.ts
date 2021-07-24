@@ -18,10 +18,6 @@ export default abstract class ModelDefinition extends Definition<ModelDefinition
     }
 
     protected validateDefinition(): Error[] {
-        const typeErrors = this.validateStructureType();
-        if (!isEmpty(typeErrors)) {
-            return typeErrors;
-        }
         const errors: Error[] = [];
         errors.push(...this.validateStructure(), ...this.validateRules());
         return errors;
@@ -34,8 +30,6 @@ export default abstract class ModelDefinition extends Definition<ModelDefinition
         });
         return errors;
     }
-
-    protected abstract validateStructureType(): Error[];
 
     protected abstract validateStructure(): Error[];
 }
