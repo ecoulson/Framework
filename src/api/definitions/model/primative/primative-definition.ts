@@ -1,7 +1,7 @@
 import ModelDefinition from '../common/model-definition';
 import PrimativeDefinitionInterface from './primative-definition.interface';
 
-export default class PrimativeDefinition extends ModelDefinition {
+export default abstract class PrimativeDefinition extends ModelDefinition {
     constructor(definition: PrimativeDefinitionInterface) {
         super({
             name: definition.name,
@@ -11,8 +11,8 @@ export default class PrimativeDefinition extends ModelDefinition {
         });
     }
 
-    protected validateModel() {
-        if (this.isStructureRawType()) {
+    protected validateStructure() {
+        if (this.isStructureAPrimative()) {
             return [];
         }
         return this.validatePrimativeDefinition();
@@ -20,5 +20,9 @@ export default class PrimativeDefinition extends ModelDefinition {
 
     private validatePrimativeDefinition(): Error[] {
         return (this.definition.structure as PrimativeDefinition).validate();
+    }
+
+    protected validateStructureType() {
+        return [];
     }
 }

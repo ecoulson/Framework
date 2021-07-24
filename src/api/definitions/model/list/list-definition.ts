@@ -12,8 +12,12 @@ export default class ListDefinition extends ModelDefinition {
         });
     }
 
-    protected validateModel(): Error[] {
-        if (this.isStructureRawType()) {
+    protected validateStructureType() {
+        return [];
+    }
+
+    protected validateStructure(): Error[] {
+        if (this.isStructureAPrimative()) {
             return [];
         } else {
             return (this.definition.structure as ModelDefinition).validate();

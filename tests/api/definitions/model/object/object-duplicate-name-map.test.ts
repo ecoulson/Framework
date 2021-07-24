@@ -1,5 +1,6 @@
 import ModelDefinition from '../../../../../src/api/definitions/model/common/model-definition';
 import ModelType from '../../../../../src/api/definitions/model/common/model-type';
+import DuplicateObjectNameError from '../../../../../src/api/definitions/model/object/duplicate-object-name-error';
 import ObjectDuplicateNameMap from '../../../../../src/api/definitions/model/object/object-duplicate-name-map';
 import PrimativeDefinitionType from '../../../../../src/api/definitions/model/primative/primative-definition-type';
 
@@ -13,7 +14,11 @@ class ModelDefinitionStub extends ModelDefinition {
         });
     }
 
-    protected validateModel(): Error[] {
+    protected validateStructure(): Error[] {
+        return [];
+    }
+
+    protected validateStructureType() {
         return [];
     }
 }
@@ -23,11 +28,32 @@ describe('Object Duplicate Name Map Test Suite', () => {
 
     test('Should create a name map with valid name key pairs', () => {
         const map = new ObjectDuplicateNameMap({
-            a: new ModelDefinitionStub('A'),
-            b: new ModelDefinitionStub('B'),
-            c: new ModelDefinitionStub('C'),
-        });
+            name: NAME,
+            structure: {
+                a: new ModelDefinitionStub('A'),
+                b: new ModelDefinitionStub('B'),
+                c: new ModelDefinitionStub('C'),
+            },
+        } as any);
 
-        expect(map.generateDuplicateErrorsForObjectDefinition(NAME)).toEqual([]);
+        expect(map.generateDuplicateErrorsForObjectDefinition()).toEqual([]);
+    });
+
+    test('Should create a name map with invalid name key pairs', () => {
+        const map = new ObjectDuplicateNameMap({
+            name: NAME,
+            structure: {
+                a: new ModelDefinitionStub('A'),
+                b: new ModelDefinitionStub('A'),
+                c: new ModelDefinitionStub('C'),
+            },
+        } as any);
+
+        expect(map.generateDuplicateErrorsForObjectDefinition()).toEqual([
+            new DuplicateObjectNameError(NAME, {
+                name: 'A',
+                keys: ['a', 'b'],
+            }),
+        ]);
     });
 });

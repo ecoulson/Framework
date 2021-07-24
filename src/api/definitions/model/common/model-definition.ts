@@ -1,4 +1,4 @@
-import { equals } from '../../../../common/util';
+import { equals, isEmpty } from '../../../../common/util';
 import Definition from '../../common/definition';
 import PrimativeDefinitionType from '../primative/primative-definition-type';
 import ModelDefinitionInterface from './model-definition.interface';
@@ -9,7 +9,7 @@ export default abstract class ModelDefinition extends Definition<ModelDefinition
         return this.definition.type;
     }
 
-    protected isStructureRawType() {
+    protected isStructureAPrimative() {
         return (
             equals(this.definition.structure, PrimativeDefinitionType.BOOLEAN) ||
             equals(this.definition.structure, PrimativeDefinitionType.NUMBER) ||
@@ -17,9 +17,17 @@ export default abstract class ModelDefinition extends Definition<ModelDefinition
         );
     }
 
+    protected isStructureAModel() {
+        return this.definition.structure instanceof ModelDefinition;
+    }
+
     protected validateDefinition(): Error[] {
+        const typeErrors = this.validateStructureType();
+        if (!isEmpty(typeErrors)) {
+            return typeErrors;
+        }
         const errors: Error[] = [];
-        errors.push(...this.validateModel(), ...this.validateRules());
+        errors.push(...this.validateStructure(), ...this.validateRules());
         return errors;
     }
 
@@ -31,5 +39,7 @@ export default abstract class ModelDefinition extends Definition<ModelDefinition
         return errors;
     }
 
-    protected abstract validateModel(): Error[];
+    protected abstract validateStructureType(): Error[];
+
+    protected abstract validateStructure(): Error[];
 }

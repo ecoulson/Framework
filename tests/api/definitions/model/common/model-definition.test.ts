@@ -7,7 +7,11 @@ import RuleDefinition from '../../../../../src/api/definitions/rule/rule-definit
 jest.mock('../../../../../src/api/definitions/rule/rule-definition');
 
 class ModelDefinitionStub extends ModelDefinition {
-    protected validateModel(): Error[] {
+    protected validateStructure(): Error[] {
+        return [];
+    }
+
+    protected validateStructureType() {
         return [];
     }
 }
